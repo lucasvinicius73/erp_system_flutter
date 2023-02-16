@@ -1,11 +1,13 @@
 import 'package:erp_system/src/sales/sale_page.dart';
 import 'package:erp_system/src/stock/stock_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../finances/finances_page.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../shared/store/pages.store.dart';
+import 'widgets/custom_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,10 +25,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<PageStore>(context);
+    //final store = Provider.of<PageStore>(context);
+    final store = context.watch<PageStore>();
     return Observer(
         builder: (_) => Scaffold(
-              drawer: const NavigationDrawer(children: []),
+              drawer: const CustomDrawer(),
               appBar: AppBar(title: const Text('Estoque'), actions: const []),
               body: Center(
                 child: _widgetOptions.elementAt(store.selectedIndex),
@@ -34,20 +37,19 @@ class _HomePageState extends State<HomePage> {
               bottomNavigationBar: BottomNavigationBar(
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.attach_money),
-                      label: 'Finances',
-                      backgroundColor: Colors.red),
+                    icon: Icon(Icons.attach_money),
+                    label: 'Finances',
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.point_of_sale),
-                      label: 'Sales',
-                      backgroundColor: Colors.green),
+                    icon: Icon(Icons.point_of_sale),
+                    label: 'Sales',
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.inventory),
-                      label: 'Stock',
-                      backgroundColor: Colors.pink)
+                    icon: Icon(Icons.inventory),
+                    label: 'Stock',
+                  ),
                 ],
                 currentIndex: store.selectedIndex,
-                selectedItemColor: Colors.amber[800],
                 onTap: store.onItemTapped,
               ),
             ));

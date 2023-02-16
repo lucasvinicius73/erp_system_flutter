@@ -1,6 +1,8 @@
 import 'package:erp_system/src/stock/products_list.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/filter_dialog.dart';
+
 class StockPage extends StatefulWidget {
   const StockPage({super.key});
 
@@ -10,6 +12,15 @@ class StockPage extends StatefulWidget {
 
 class _StockPageState extends State<StockPage> {
   late TextEditingController _controller;
+
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (context) {
+        return const Filter();
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -48,10 +59,13 @@ class _StockPageState extends State<StockPage> {
             Row(
               children: [
                 const Expanded(child: SizedBox()),
-                const Text('Filter'),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.filter_alt_outlined)),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.filter_alt_outlined),
+                  label: const Text('Filter'),
+                  onPressed: () {
+                    _showModalBottomSheet(context);
+                  },
+                ),
               ],
             ),
             const SizedBox(
