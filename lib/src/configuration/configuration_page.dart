@@ -12,9 +12,7 @@ class ConfigurationPage extends StatefulWidget {
 class _ConfigurationPageState extends State<ConfigurationPage> {
   @override
   Widget build(BuildContext context) {
-    final appStore = context.watch<AppStore>(
-      (store) => store.themeMode,
-    );
+    final appStore = context.watch<AppStore>();
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppBar(
@@ -54,7 +52,10 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                 onChanged: appStore.changeThemeMode,
               ),
               const SizedBox(height: 20),
-              const Text('data'),
+              Text(
+                'Controle de dados',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 10),
               OutlinedButton(
                 child: const Text('Apagar Cache e reiniciar o app'),

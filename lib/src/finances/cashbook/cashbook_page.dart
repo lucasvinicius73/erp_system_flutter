@@ -53,6 +53,11 @@ class _CashBookPageState extends State<CashBookPage>
         title: const Text('Cash Book'),
         actions: const [],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
+        label: const Text('Adicionar Lançamento'),
+        onPressed: () {},
+      ),
       body: Center(
           child: Column(
         children: [
@@ -143,7 +148,7 @@ class _CashBookPageState extends State<CashBookPage>
                 ),
               ]),
             ),
-          )
+          ),
         ],
       )),
     );
