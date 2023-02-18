@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class JsonPlaceholderService {
-  final url = 'http://127.0.0.1:8000/api/v1/products';
+  final url = 'http://192.168.0.127:8000/api/v1/products';
   final dio = Dio();
   String username = 'lucas';
   String password = '120399';

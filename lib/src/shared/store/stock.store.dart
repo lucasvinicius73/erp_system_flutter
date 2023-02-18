@@ -15,7 +15,7 @@ abstract class _StockStore with Store {
   @action
   Future<List<Product>?> getProductsPage() async {
     products = await service.getProducts();
-    print(products?[1].title);
+    print(products[1].title);
     return products;
   }
 }
