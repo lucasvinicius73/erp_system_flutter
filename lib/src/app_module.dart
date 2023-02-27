@@ -7,6 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'configuration/configuration_page.dart';
 import 'home/home_module.dart';
 import 'shared/store/add_product.store.dart';
+import 'shared/store/book_entry.store.dart';
 import 'shared/store/cashbook.store.dart';
 
 class AppModule extends Module {
@@ -18,6 +19,7 @@ class AppModule extends Module {
         AutoBind.singleton(AddProductStore.new),
         AutoBind.singleton(FinancesStore.new),
         AutoBind.singleton(CashBookStore.new),
+        AutoBind.singleton(BookEntryStore.new),
       ];
   @override
   List<ModularRoute> get routes => [

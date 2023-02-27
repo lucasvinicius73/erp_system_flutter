@@ -136,6 +136,7 @@ class _AddProductState extends State<AddProduct> {
                     label: const Text('Salvar'),
                     onPressed: () {
                       Navigator.pop(context);
+                      
                       //store.setProductsPage();
                     },
                   ),
