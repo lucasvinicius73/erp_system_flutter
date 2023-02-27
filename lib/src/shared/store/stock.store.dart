@@ -10,15 +10,12 @@ class StockStore = _StockStore with _$StockStore;
 abstract class _StockStore with Store {
   final service = JsonPlaceholderService();
 
- 
   @observable
   late Product product;
 
   @observable
   List<Product> products = [];
-  // late TextEditingController controller = TextEditingController();
-
-
+  TextEditingController controller = TextEditingController();
 
   @action
   Future<List<Product>?> getProductsPage() async {
@@ -27,6 +24,4 @@ abstract class _StockStore with Store {
     print(products[1].title);
     return products;
   }
-
-
 }

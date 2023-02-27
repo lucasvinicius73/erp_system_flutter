@@ -1,5 +1,8 @@
 import 'package:erp_system/src/finances/cashbook/widgets/list_postings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../shared/store/cashbook.store.dart';
 
 class CashBookPage extends StatefulWidget {
   const CashBookPage({super.key});
@@ -48,6 +51,7 @@ class _CashBookPageState extends State<CashBookPage>
 
   @override
   Widget build(BuildContext context) {
+    final store = context.watch<CashBookStore>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cash Book'),

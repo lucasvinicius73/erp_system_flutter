@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/data_chart.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import '../shared/store/finances.store.dart';
 import 'widgets/pie_chart.dart';
 
 class FinancesPage extends StatefulWidget {
@@ -12,23 +13,19 @@ class FinancesPage extends StatefulWidget {
 class _FinancesPageState extends State<FinancesPage> {
   @override
   Widget build(BuildContext context) {
+    final store = context.watch<FinancesStore>();
     return ListView(children: [
       Padding(
         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Center(
-            //     child: Text(
-            //   'Faturamento',
-            //   style: styleTitle,
-            // )),
             Center(
               child: SizedBox(
                   height: 350,
                   child: PieChartWidget(
                     'Faturamento',
-                    dataList: _getChartData(),
+                    dataList: store.getChartData(),
                   )),
             ),
             Center(
@@ -81,15 +78,6 @@ class _FinancesPageState extends State<FinancesPage> {
         ),
       ),
     ]);
-  }
-
-  List<DataChart> _getChartData() {
-    final List<DataChart> chartData = [
-      DataChart('Anual', 30000),
-      DataChart('Mensal', 10000),
-      DataChart('Media', 12000),
-    ];
-    return chartData;
   }
 
   TextStyle styleText = const TextStyle(fontSize: 22);
