@@ -6,21 +6,21 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'configuration/configuration_page.dart';
 import 'home/home_module.dart';
+import 'shared/store/add_product.store.dart';
 
 class AppModule extends Module {
   @override
-  // TODO: implement binds
   List<Bind<Object>> get binds => [
         AutoBind.singleton(AppStore.new),
         AutoBind.singleton(PageStore.new),
         AutoBind.singleton(StockStore.new),
+        AutoBind.singleton(AddProductStore.new),
       ];
   @override
-  // TODO: implement routes
   List<ModularRoute> get routes => [
         ModuleRoute('/home', module: HomeModule()),
         ModuleRoute('/cashbook', module: CashBookModule()),
         ChildRoute('/config',
-            child: (context, args) => const ConfigurationPage())
+            child: (context, args) => const ConfigurationPage()),
       ];
 }

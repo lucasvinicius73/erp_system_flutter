@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-
 import '../models/data_chart.dart';
 import 'widgets/pie_chart.dart';
 
@@ -10,14 +7,6 @@ class FinancesPage extends StatefulWidget {
 
   @override
   State<FinancesPage> createState() => _FinancesPageState();
-}
-
-/// Sample linear data type.
-class LinearSales {
-  final int year;
-  final int sales;
-
-  LinearSales(this.year, this.sales);
 }
 
 class _FinancesPageState extends State<FinancesPage> {

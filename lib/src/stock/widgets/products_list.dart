@@ -26,9 +26,9 @@ class ListProducts extends StatelessWidget {
                               'https://www.terraempresas.com.br/blog/wp-content/uploads/2021/02/terra-empresas-produtos-mais-vendidos-na-internet-capa.png'),
                         ),
                         title: Text(
-                          (store.products![index].title),
+                          (store.products[index].title),
                         ),
-                        subtitle: Text(store.products![index].price),
+                        subtitle: Text(store.products[index].price),
                         onTap: () {},
                       );
                     },

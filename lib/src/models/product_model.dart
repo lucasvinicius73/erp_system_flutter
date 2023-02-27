@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 class Product {
-  final int id;
-  final String title;
-  final String price;
-  final String cost;
-  final String description;
-  final int category;
-  final int batch;
+  int id;
+  String title;
+  String price;
+  String cost;
+  String description;
+  int category;
+  int batch;
+  int quantity;
 
   Product(
     this.id,
@@ -15,6 +18,7 @@ class Product {
     this.category,
     this.cost,
     this.batch,
+    this.quantity,
   );
 
   Product.fromJson(Map json)
@@ -24,16 +28,17 @@ class Product {
         description = json['description'],
         category = json['category'],
         cost = json['cost'],
-        batch = json['batch'];
+        batch = json['batch'],
+        quantity = json['quantity'];
   Map toJson() {
     return {
-      id: 'id',
       title: 'name',
       price: 'price',
       description: 'description',
       category: 'category',
       cost: 'cost',
-      batch: 'batch'
+      batch: 'batch',
+      quantity: 'quantity'
     };
   }
 }

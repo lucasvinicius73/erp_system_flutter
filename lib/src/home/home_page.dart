@@ -1,11 +1,6 @@
-import 'package:erp_system/src/sales/sale_page.dart';
-import 'package:erp_system/src/stock/stock_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../finances/finances_page.dart';
-//import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 import '../shared/store/pages.store.dart';
 import 'widgets/custom_drawer.dart';
 
@@ -17,12 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const List<Widget> _widgetOptions = <Widget>[
-    FinancesPage(),
-    SalePage(),
-    StockPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     //final store = Provider.of<PageStore>(context);
@@ -30,9 +19,9 @@ class _HomePageState extends State<HomePage> {
     return Observer(
         builder: (_) => Scaffold(
               drawer: const CustomDrawer(),
-              appBar: AppBar(title: const Text('Estoque'), actions: const []),
+              appBar: AppBar(title: Text(store.title), actions: const []),
               body: Center(
-                child: _widgetOptions.elementAt(store.selectedIndex),
+                child: store.widgetOptions.elementAt(store.selectedIndex),
               ),
               bottomNavigationBar: BottomNavigationBar(
                 items: const <BottomNavigationBarItem>[

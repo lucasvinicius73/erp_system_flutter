@@ -56,7 +56,9 @@ class _CashBookPageState extends State<CashBookPage>
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),
         label: const Text('Adicionar Lançamento'),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed('./entry');
+        },
       ),
       body: Center(
           child: Column(
