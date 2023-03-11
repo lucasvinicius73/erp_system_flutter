@@ -1,10 +1,14 @@
+import 'package:erp_system/src/shared/models/category_model.dart';
+import 'package:erp_system/src/shared/services/category_json_services.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 part 'add_product.store.g.dart';
 
+// ignore: library_private_types_in_public_api
 class AddProductStore = _AddProductStore with _$AddProductStore;
 
 abstract class _AddProductStore with Store {
+  final service = CategoryJsonServices();
   @observable
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerPrice = TextEditingController();
@@ -12,43 +16,25 @@ abstract class _AddProductStore with Store {
   TextEditingController controllerDescription = TextEditingController();
   TextEditingController controllerQuantity = TextEditingController();
 
-  List<String> list = <String>[
-    'Celular Android',
-    'Iphone',
-    'Caixa de Som',
-    'Fone de Ouvido',
-    'Cabo'
-  ];
+  @observable
+  List<CategoryModel> categorys = [];
 
   @observable
-  late String dropdownValue = list.first;
+  CategoryModel dropdownValue = CategoryModel(1, 'teste');
 
   @action
-  void changeDropdown(String? value) {
+  void changeDropdown(CategoryModel? value) {
     if (value != null) {
       dropdownValue = value;
     }
   }
 
-  // @action
-  // void setProductsPage() async {
-  //   Product product2 = Product(
-  //     1,
-  //     controllerName.text,
-  //     controllerPrice.text,
-  //     controllerCost.text,
-  //     int.parse(controllerQuantity.text),
-  //     controllerDescription.text,
-  //     1,
-  //     1,
-  //   );
-  //   product.title = controllerName.text;
-  //   product.price = controllerPrice.text;
-  //   product.cost = controllerCost.text;
-  //   product.quantity = int.parse(controllerQuantity.text);
-  //   product.description = controllerDescription.text;
-  //   product.category = 1;
-  //   product.batch = 1;
-  //   service.setProduct(product2);
-  // }
+  @action
+  Future<List<CategoryModel>?> getCategorys() async {
+    categorys = await service.getCategory();
+    changeDropdown(categorys[1]);
+    // ignore: avoid_print
+    print(dropdownValue.name);
+    return categorys;
+  }
 }

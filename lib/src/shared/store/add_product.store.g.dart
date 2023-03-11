@@ -25,27 +25,51 @@ mixin _$AddProductStore on _AddProductStore, Store {
     });
   }
 
+  late final _$categorysAtom =
+      Atom(name: '_AddProductStore.categorys', context: context);
+
+  @override
+  List<CategoryModel> get categorys {
+    _$categorysAtom.reportRead();
+    return super.categorys;
+  }
+
+  @override
+  set categorys(List<CategoryModel> value) {
+    _$categorysAtom.reportWrite(value, super.categorys, () {
+      super.categorys = value;
+    });
+  }
+
   late final _$dropdownValueAtom =
       Atom(name: '_AddProductStore.dropdownValue', context: context);
 
   @override
-  String get dropdownValue {
+  CategoryModel get dropdownValue {
     _$dropdownValueAtom.reportRead();
     return super.dropdownValue;
   }
 
   @override
-  set dropdownValue(String value) {
+  set dropdownValue(CategoryModel value) {
     _$dropdownValueAtom.reportWrite(value, super.dropdownValue, () {
       super.dropdownValue = value;
     });
+  }
+
+  late final _$getCategorysAsyncAction =
+      AsyncAction('_AddProductStore.getCategorys', context: context);
+
+  @override
+  Future<List<CategoryModel>?> getCategorys() {
+    return _$getCategorysAsyncAction.run(() => super.getCategorys());
   }
 
   late final _$_AddProductStoreActionController =
       ActionController(name: '_AddProductStore', context: context);
 
   @override
-  void changeDropdown(String? value) {
+  void changeDropdown(CategoryModel? value) {
     final _$actionInfo = _$_AddProductStoreActionController.startAction(
         name: '_AddProductStore.changeDropdown');
     try {
@@ -59,6 +83,7 @@ mixin _$AddProductStore on _AddProductStore, Store {
   String toString() {
     return '''
 controllerName: ${controllerName},
+categorys: ${categorys},
 dropdownValue: ${dropdownValue}
     ''';
   }
