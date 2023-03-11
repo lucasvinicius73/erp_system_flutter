@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../models/data_chart.dart';
+import '../../shared/models/data_chart.dart';
 
 class PieChartWidget extends StatelessWidget {
   final String title;

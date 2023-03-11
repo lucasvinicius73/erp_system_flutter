@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-import '../../models/data_chart.dart';
+import '../models/data_chart.dart';
 part 'finances.store.g.dart';
 
 class FinancesStore = _FinancesStore with _$FinancesStore;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../models/product_model.dart';
+import '../shared/models/product_model.dart';
 import '../shared/store/stock.store.dart';
 import 'widgets/filter_dialog.dart';
 
@@ -88,7 +88,7 @@ class _StockPageState extends State<StockPage> {
                                           'https://www.terraempresas.com.br/blog/wp-content/uploads/2021/02/terra-empresas-produtos-mais-vendidos-na-internet-capa.png'),
                                     ),
                                     title: Text(
-                                      (store.products[index].title),
+                                      (store.products[index].name),
                                     ),
                                     subtitle: Text(store.products[index].price),
                                     onTap: () {},

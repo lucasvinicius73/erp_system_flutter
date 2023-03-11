@@ -2,43 +2,36 @@ import 'dart:convert';
 
 class Product {
   int id;
-  String title;
+  String name;
   String price;
-  String cost;
-  String description;
+  int brand;
   int category;
-  int batch;
-  int quantity;
+  String description;
 
   Product(
     this.id,
-    this.title,
+    this.name,
     this.price,
+    this.brand,
     this.description,
     this.category,
-    this.cost,
-    this.batch,
-    this.quantity,
   );
 
   Product.fromJson(Map json)
       : id = json['id'],
-        title = json['name'],
+        name = json['name'],
         price = json['price'],
         description = json['description'],
         category = json['category'],
-        cost = json['cost'],
-        batch = json['batch'],
-        quantity = json['quantity'];
+        brand = json['brand'];
+
   Map toJson() {
     return {
-      title: 'name',
+      name: 'name',
       price: 'price',
-      description: 'description',
+      brand: 'brand',
       category: 'category',
-      cost: 'cost',
-      batch: 'batch',
-      quantity: 'quantity'
+      description: 'description',
     };
   }
 }
