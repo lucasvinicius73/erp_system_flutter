@@ -90,7 +90,8 @@ class _StockPageState extends State<StockPage> {
                                     title: Text(
                                       (store.products[index].name),
                                     ),
-                                    subtitle: Text(store.products[index].price),
+                                    subtitle:
+                                        Text('${store.products[index].price}'),
                                     onTap: () {},
                                   ),
                                 ),

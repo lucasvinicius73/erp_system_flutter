@@ -1,11 +1,14 @@
 class Brand {
+  final int id;
   final String name;
 
-  Brand(this.name);
+  Brand(this.id, this.name);
 
-  Brand.fromJson(Map json) : name = json['name'];
+  Brand.fromJson(Map json)
+      : id = json['id'],
+        name = json['name'];
 
   Map toJson() {
-    return {name: 'name'};
+    return {id: 'id', name: 'name'};
   }
 }

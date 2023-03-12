@@ -41,19 +41,52 @@ mixin _$AddProductStore on _AddProductStore, Store {
     });
   }
 
-  late final _$dropdownValueAtom =
-      Atom(name: '_AddProductStore.dropdownValue', context: context);
+  late final _$brandsAtom =
+      Atom(name: '_AddProductStore.brands', context: context);
 
   @override
-  CategoryModel get dropdownValue {
-    _$dropdownValueAtom.reportRead();
-    return super.dropdownValue;
+  List<Brand> get brands {
+    _$brandsAtom.reportRead();
+    return super.brands;
   }
 
   @override
-  set dropdownValue(CategoryModel value) {
-    _$dropdownValueAtom.reportWrite(value, super.dropdownValue, () {
-      super.dropdownValue = value;
+  set brands(List<Brand> value) {
+    _$brandsAtom.reportWrite(value, super.brands, () {
+      super.brands = value;
+    });
+  }
+
+  late final _$dropdownValueCategoryAtom =
+      Atom(name: '_AddProductStore.dropdownValueCategory', context: context);
+
+  @override
+  CategoryModel get dropdownValueCategory {
+    _$dropdownValueCategoryAtom.reportRead();
+    return super.dropdownValueCategory;
+  }
+
+  @override
+  set dropdownValueCategory(CategoryModel value) {
+    _$dropdownValueCategoryAtom.reportWrite(value, super.dropdownValueCategory,
+        () {
+      super.dropdownValueCategory = value;
+    });
+  }
+
+  late final _$dropdownValueBrandAtom =
+      Atom(name: '_AddProductStore.dropdownValueBrand', context: context);
+
+  @override
+  Brand get dropdownValueBrand {
+    _$dropdownValueBrandAtom.reportRead();
+    return super.dropdownValueBrand;
+  }
+
+  @override
+  set dropdownValueBrand(Brand value) {
+    _$dropdownValueBrandAtom.reportWrite(value, super.dropdownValueBrand, () {
+      super.dropdownValueBrand = value;
     });
   }
 
@@ -65,15 +98,42 @@ mixin _$AddProductStore on _AddProductStore, Store {
     return _$getCategorysAsyncAction.run(() => super.getCategorys());
   }
 
+  late final _$getBrandsAsyncAction =
+      AsyncAction('_AddProductStore.getBrands', context: context);
+
+  @override
+  Future<List<Brand>?> getBrands() {
+    return _$getBrandsAsyncAction.run(() => super.getBrands());
+  }
+
+  late final _$postProductAsyncAction =
+      AsyncAction('_AddProductStore.postProduct', context: context);
+
+  @override
+  Future<dynamic> postProduct() {
+    return _$postProductAsyncAction.run(() => super.postProduct());
+  }
+
   late final _$_AddProductStoreActionController =
       ActionController(name: '_AddProductStore', context: context);
 
   @override
-  void changeDropdown(CategoryModel? value) {
+  void changeDropdownCategory(CategoryModel? value) {
     final _$actionInfo = _$_AddProductStoreActionController.startAction(
-        name: '_AddProductStore.changeDropdown');
+        name: '_AddProductStore.changeDropdownCategory');
     try {
-      return super.changeDropdown(value);
+      return super.changeDropdownCategory(value);
+    } finally {
+      _$_AddProductStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeDropdownBrand(Brand? value) {
+    final _$actionInfo = _$_AddProductStoreActionController.startAction(
+        name: '_AddProductStore.changeDropdownBrand');
+    try {
+      return super.changeDropdownBrand(value);
     } finally {
       _$_AddProductStoreActionController.endAction(_$actionInfo);
     }
@@ -84,7 +144,9 @@ mixin _$AddProductStore on _AddProductStore, Store {
     return '''
 controllerName: ${controllerName},
 categorys: ${categorys},
-dropdownValue: ${dropdownValue}
+brands: ${brands},
+dropdownValueCategory: ${dropdownValueCategory},
+dropdownValueBrand: ${dropdownValueBrand}
     ''';
   }
 }

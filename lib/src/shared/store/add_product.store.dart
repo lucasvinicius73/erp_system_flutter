@@ -1,5 +1,9 @@
+import 'package:erp_system/src/shared/models/brand_model.dart';
 import 'package:erp_system/src/shared/models/category_model.dart';
+import 'package:erp_system/src/shared/models/product_model.dart';
+import 'package:erp_system/src/shared/services/brand_jason_services.dart';
 import 'package:erp_system/src/shared/services/category_json_services.dart';
+import 'package:erp_system/src/shared/services/product_json_services.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 part 'add_product.store.g.dart';
@@ -8,11 +12,13 @@ part 'add_product.store.g.dart';
 class AddProductStore = _AddProductStore with _$AddProductStore;
 
 abstract class _AddProductStore with Store {
-  final service = CategoryJsonServices();
+  final serviceCategory = CategoryJsonServices();
+  final serviceBrand = BrandJsonServices();
+  final serviceProduct = ProductJsonServices();
+
   @observable
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerPrice = TextEditingController();
-  TextEditingController controllerCost = TextEditingController();
   TextEditingController controllerDescription = TextEditingController();
   TextEditingController controllerQuantity = TextEditingController();
 
@@ -20,21 +26,59 @@ abstract class _AddProductStore with Store {
   List<CategoryModel> categorys = [];
 
   @observable
-  CategoryModel dropdownValue = CategoryModel(1, 'teste');
+  List<Brand> brands = [];
+
+  @observable
+  CategoryModel dropdownValueCategory = CategoryModel(1, 'teste');
+  @observable
+  Brand dropdownValueBrand = Brand(1, 'teste');
 
   @action
-  void changeDropdown(CategoryModel? value) {
+  void changeDropdownCategory(CategoryModel? value) {
     if (value != null) {
-      dropdownValue = value;
+      dropdownValueCategory = value;
+    }
+  }
+
+  @action
+  void changeDropdownBrand(Brand? value) {
+    if (value != null) {
+      dropdownValueBrand = value;
     }
   }
 
   @action
   Future<List<CategoryModel>?> getCategorys() async {
-    categorys = await service.getCategory();
-    changeDropdown(categorys[1]);
+    getBrands();
+    categorys = await serviceCategory.getCategory();
+    changeDropdownCategory(categorys[1]);
     // ignore: avoid_print
-    print(dropdownValue.name);
+    print(dropdownValueCategory.name);
     return categorys;
+  }
+
+  @action
+  Future<List<Brand>?> getBrands() async {
+    brands = await serviceBrand.getBrand();
+    changeDropdownBrand(brands[1]);
+    // ignore: avoid_print
+    print(dropdownValueBrand.name);
+    return brands;
+  }
+
+  @action
+  Future postProduct() async {
+    Product product = Product(
+      1,
+      controllerName.text,
+      double.parse(controllerPrice.text),
+      dropdownValueBrand.id,
+      controllerDescription.text,
+      dropdownValueCategory.id,
+    );
+    serviceProduct.postProduct(product);
+    // if (product2.name != 'name') {
+    //   serviceProduct.postProduct(product2);
+    // }
   }
 }

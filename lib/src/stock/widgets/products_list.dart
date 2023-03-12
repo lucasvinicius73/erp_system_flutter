@@ -28,7 +28,7 @@ class ListProducts extends StatelessWidget {
                         title: Text(
                           (store.products[index].name),
                         ),
-                        subtitle: Text(store.products[index].price),
+                        subtitle: Text('${store.products[index].price}'),
                         onTap: () {},
                       );
                     },

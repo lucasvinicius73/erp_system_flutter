@@ -21,20 +21,14 @@ class ProductJsonServices extends JsonServices {
     return products;
   }
 
-  Future<http.Response> setProduct() async {
+  Future<http.Response> postProduct(Product product) async {
     final response = await http.post(
       Uri.parse(urlProduct),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'authorization': auth
       },
-      body: jsonEncode({
-        "name": "Teste Flutter 4",
-        "price": 3000.0,
-        "brand": 2,
-        "category": 1,
-        "description": "Eae"
-      }),
+      body: jsonEncode(product),
     );
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');

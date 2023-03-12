@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import '../../shared/models/brand_model.dart';
 import '../../shared/store/add_product.store.dart';
 
 class AddProduct extends StatefulWidget {
@@ -24,7 +25,7 @@ class _AddProductState extends State<AddProduct> {
           TextButton(
             child: const Text('Salvar'),
             onPressed: () {
-              Navigator.pop(context);
+              store.postProduct();
             },
           )
         ],
@@ -75,37 +76,11 @@ class _AddProductState extends State<AddProduct> {
                               height: 15,
                             ),
                             Text(
-                              'Custo:',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            TextField(
-                              controller: store.controllerCost,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Quantidade:',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            TextField(
-                              controller: store.controllerQuantity,
-                              decoration: const InputDecoration(
-                                  labelText: 'Digite a quantidade de Produtos'),
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
                               'Categoria:',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             DropdownButton<CategoryModel>(
-                              value: store.dropdownValue,
+                              value: store.dropdownValueCategory,
                               icon: Icon(Icons.arrow_downward,
                                   color: Theme.of(context)
                                       .buttonTheme
@@ -119,11 +94,46 @@ class _AddProductState extends State<AddProduct> {
                                     .colorScheme!
                                     .primary,
                               ),
-                              onChanged: store.changeDropdown,
+                              onChanged: store.changeDropdownCategory,
                               items: store.categorys
                                   .map<DropdownMenuItem<CategoryModel>>(
                                       (CategoryModel value) {
                                 return DropdownMenuItem<CategoryModel>(
+                                  value: value,
+                                  child: Text(
+                                    value.name,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Marca:',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            DropdownButton<Brand>(
+                              value: store.dropdownValueBrand,
+                              icon: Icon(Icons.arrow_downward,
+                                  color: Theme.of(context)
+                                      .buttonTheme
+                                      .colorScheme!
+                                      .primary),
+                              elevation: 10,
+                              underline: Container(
+                                height: 2,
+                                color: Theme.of(context)
+                                    .buttonTheme
+                                    .colorScheme!
+                                    .primary,
+                              ),
+                              onChanged: store.changeDropdownBrand,
+                              items: store.brands
+                                  .map<DropdownMenuItem<Brand>>((Brand value) {
+                                return DropdownMenuItem<Brand>(
                                   value: value,
                                   child: Text(
                                     value.name,
@@ -151,7 +161,7 @@ class _AddProductState extends State<AddProduct> {
                                 icon: const Icon(Icons.add),
                                 label: const Text('Salvar'),
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  store.postProduct();
 
                                   //store.setProductsPage();
                                 },

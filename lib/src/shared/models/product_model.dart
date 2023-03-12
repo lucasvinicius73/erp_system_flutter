@@ -2,7 +2,7 @@
 class Product {
   int id;
   String name;
-  String price;
+  double price;
   int brand;
   int category;
   String description;
@@ -19,18 +19,18 @@ class Product {
   Product.fromJson(Map json)
       : id = json['id'],
         name = json['name'],
-        price = json['price'],
+        price = double.parse(json['price']),
         description = json['description'],
         category = json['category'],
         brand = json['brand'];
 
   Map toJson() {
     return {
-      name: 'name',
-      price: 'price',
-      brand: 'brand',
-      category: 'category',
-      description: 'description',
+      'name': name,
+      'price': price,
+      'category': category,
+      'brand': brand,
+      'description': description
     };
   }
 }
