@@ -90,6 +90,30 @@ mixin _$AddProductStore on _AddProductStore, Store {
     });
   }
 
+  late final _$fetchReposFutureAtom =
+      Atom(name: '_AddProductStore.fetchReposFuture', context: context);
+
+  @override
+  ObservableFuture<List<CategoryModel>> get fetchReposFuture {
+    _$fetchReposFutureAtom.reportRead();
+    return super.fetchReposFuture;
+  }
+
+  @override
+  set fetchReposFuture(ObservableFuture<List<CategoryModel>> value) {
+    _$fetchReposFutureAtom.reportWrite(value, super.fetchReposFuture, () {
+      super.fetchReposFuture = value;
+    });
+  }
+
+  late final _$getCategoryAsyncAction =
+      AsyncAction('_AddProductStore.getCategory', context: context);
+
+  @override
+  Future<ObservableFuture<List<CategoryModel>>> getCategory() {
+    return _$getCategoryAsyncAction.run(() => super.getCategory());
+  }
+
   late final _$getCategorysAsyncAction =
       AsyncAction('_AddProductStore.getCategorys', context: context);
 
@@ -154,7 +178,8 @@ controllerName: ${controllerName},
 categorys: ${categorys},
 brands: ${brands},
 dropdownValueCategory: ${dropdownValueCategory},
-dropdownValueBrand: ${dropdownValueBrand}
+dropdownValueBrand: ${dropdownValueBrand},
+fetchReposFuture: ${fetchReposFuture}
     ''';
   }
 }

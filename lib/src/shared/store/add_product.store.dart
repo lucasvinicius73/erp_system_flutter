@@ -35,6 +35,20 @@ abstract class _AddProductStore with Store {
   @observable
   Brand dropdownValueBrand = Brand(1, 'teste');
 
+  static ObservableFuture<List<CategoryModel>> emptyResponse =
+      ObservableFuture.value([]);
+
+  @observable
+  ObservableFuture<List<CategoryModel>> fetchReposFuture = emptyResponse;
+
+  @action
+  Future<ObservableFuture<List<CategoryModel>>> getCategory() async {
+    final result = await serviceCategory.getCategory();
+    fetchReposFuture = ObservableFuture.value(result);
+    print(fetchReposFuture);
+    return fetchReposFuture;
+  }
+
   @action
   void changeDropdownCategory(CategoryModel? value) {
     if (value != null) {
@@ -54,8 +68,6 @@ abstract class _AddProductStore with Store {
     getBrands();
     categorys = await serviceCategory.getCategory();
     changeDropdownCategory(categorys[1]);
-    // ignore: avoid_print
-    print(dropdownValueCategory.name);
     return categorys;
   }
 
@@ -63,8 +75,6 @@ abstract class _AddProductStore with Store {
   Future<List<Brand>?> getBrands() async {
     brands = await serviceBrand.getBrand();
     changeDropdownBrand(brands[1]);
-    // ignore: avoid_print
-    print(dropdownValueBrand.name);
     return brands;
   }
 

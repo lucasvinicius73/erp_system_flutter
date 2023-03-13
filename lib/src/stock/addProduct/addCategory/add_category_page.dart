@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
 
 import '../../../shared/store/add_product.store.dart';
 
@@ -14,6 +16,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
   @override
   Widget build(BuildContext context) {
     final store = context.watch<AddProductStore>();
+    store.getCategory();
     return Scaffold(
       appBar: AppBar(title: const Text('Adicionar Categoria'), actions: [
         TextButton(
@@ -42,9 +45,28 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
             const SizedBox(
               height: 20,
             ),
+            Expanded(
+              child: Observer(
+                builder: (context) => store.fetchReposFuture.status ==
+                        FutureStatus.pending
+                    ? const LinearProgressIndicator()
+                    : ListView.builder(
+                        itemCount: store.fetchReposFuture.value?.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child:
+                                Text(store.fetchReposFuture.value![index].name),
+                          );
+                        },
+                      ),
+              ),
+            ),
             Center(
               child: ElevatedButton.icon(
-                  onPressed: () => store.postCategory(),
+                  onPressed: () {
+                    store.postCategory();
+                    store.getCategory();
+                  },
                   icon: const Icon(Icons.add),
                   label: const Text('Salvar')),
             )
