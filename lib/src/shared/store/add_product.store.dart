@@ -22,6 +22,8 @@ abstract class _AddProductStore with Store {
   TextEditingController controllerDescription = TextEditingController();
   TextEditingController controllerQuantity = TextEditingController();
 
+  TextEditingController controllerCategoryName = TextEditingController();
+
   @observable
   List<CategoryModel> categorys = [];
 
@@ -80,5 +82,12 @@ abstract class _AddProductStore with Store {
     // if (product2.name != 'name') {
     //   serviceProduct.postProduct(product2);
     // }
+  }
+
+  @action
+  Future postCategory() async {
+    CategoryModel category = CategoryModel(1, controllerCategoryName.text);
+    serviceCategory.postCategory(category);
+    serviceCategory.getCategory();
   }
 }

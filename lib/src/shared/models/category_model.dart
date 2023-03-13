@@ -11,6 +11,6 @@ class CategoryModel {
       : id = json['id'],
         name = json['name'];
   Map toJson() {
-    return {name: 'name'};
+    return {'name': name};
   }
 }

@@ -114,6 +114,14 @@ mixin _$AddProductStore on _AddProductStore, Store {
     return _$postProductAsyncAction.run(() => super.postProduct());
   }
 
+  late final _$postCategoryAsyncAction =
+      AsyncAction('_AddProductStore.postCategory', context: context);
+
+  @override
+  Future<dynamic> postCategory() {
+    return _$postCategoryAsyncAction.run(() => super.postCategory());
+  }
+
   late final _$_AddProductStoreActionController =
       ActionController(name: '_AddProductStore', context: context);
 
